@@ -23,5 +23,12 @@ probmax.Constraints.c8 = x2 >= 0.4*(x1 + x2 + x3 + x4 + x5 + x6);
 probmax.Constraints.c9 = x1 + x4 >= 0.2*(x1 + x2 + x3 + x4 + x5 + x6);
 probmax.Constraints.c10 = x3 + x6 >= 0.2*(x1 + x2 + x3 + x4 + x5 + x6);
 
+% %Sensitivity Analysis Constraints
+% probmax.Constraints.c7 = x5 >= 0.1*(x1 + x2 + x3 + x4 + x5 + x6);
+% probmax.Constraints.c8 = x2 >= 0.2*(x1 + x2 + x3 + x4 + x5 + x6);
+% probmax.Constraints.c9 = x1 + x4 >= 0.3*(x1 + x2 + x3 + x4 + x5 + x6);
+% probmax.Constraints.c10 = x3 + x6 >= 0.3*(x1 + x2 + x3 + x4 + x5 + x6);
+
+
 problem = prob2struct(probmax);
 [sol, fval, exitflag, output] = linprog(problem)
