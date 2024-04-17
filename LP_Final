@@ -1,0 +1,27 @@
+% Decision Variables
+x1 = optimvar('x1', 'LowerBound', 0, 'UpperBound', inf);
+x2 = optimvar('x2', 'LowerBound', 0, 'UpperBound', inf);
+x3 = optimvar('x3', 'LowerBound', 0, 'UpperBound', inf);
+x4 = optimvar('x4', 'LowerBound', 0, 'UpperBound', inf);
+x5 = optimvar('x5', 'LowerBound', 0, 'UpperBound', inf);
+x6 = optimvar('x6', 'LowerBound', 0, 'UpperBound', inf);
+
+% Objective
+probmax = optimproblem('Objective', x1 + x2 + x3 + x4 + x5 + x6, 'ObjectiveSense', 'max');
+
+% Constraints
+%probmax.Constraints.c1 = 89.3*x1 + 92.18*x2 + 88.29*x3 + 92.07*x4 + 94.98*x5 + 83.29*x6 >= 1200;
+probmax.Constraints.c2 = 2.82*x1 + 1.28*x2 + 0.93*x3 + 1.92*x4 + 1.36*x5 + 2.57*x6 >= 1400;
+probmax.Constraints.c3 = 0.088*x1 + 0.068*x2 + 0.168*x3 + 0.195*x4 + 0.108*x5 + 0.071*x6 >= 300;
+probmax.Constraints.c4 = 0.047*x1 + 0.04*x2 + 0.033*x3 + 0.022*x4 + 0.036*x5 + 0.03*x6 >= 75;
+probmax.Constraints.c5 = 0.066*x1 + 0.026*x2 + 0.035*x3 + 0.044*x4 + 0.029*x5 + 0.038*x6 >= 45;
+
+probmax.Constraints.c6 = x1 + x2 + x3 + x4 + x5 + x6 <= 3000;
+
+probmax.Constraints.c7 = x5 >= 0.1*(x1 + x2 + x3 + x4 + x5 + x6);
+probmax.Constraints.c8 = x2 >= 0.4*(x1 + x2 + x3 + x4 + x5 + x6);
+probmax.Constraints.c9 = x1 + x4 >= 0.2*(x1 + x2 + x3 + x4 + x5 + x6);
+probmax.Constraints.c10 = x3 + x6 >= 0.2*(x1 + x2 + x3 + x4 + x5 + x6);
+
+problem = prob2struct(probmax);
+[sol, fval, exitflag, output] = linprog(problem)
